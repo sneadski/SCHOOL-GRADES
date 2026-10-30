@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Personal Grade Tracker</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f5f7;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:#222}
+header{background:#a51d32;color:#fff;padding:24px 18px}
+.wrap,main{max-width:900px;margin:0 auto}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:1.2px;opacity:.9}
+h1{margin:6px 0 0;font-size:25px}
+main{padding:20px 15px 32px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.tab{display:block;text-align:center;text-decoration:none;border:1px solid #ddd;background:#fff;color:#333;border-radius:9px;padding:13px 7px;font-weight:700;font-size:14px;min-height:46px}
+.tab.active{background:#a51d32;color:#fff;border-color:#a51d32}
+.screen{display:none}
+.screen:target{display:block}
+#dashboard{display:block}
+body:has(.screen:target) #dashboard{display:none}
+body:has(#dashboard:target) #dashboard{display:block}
+.card{background:#fff;border:1px solid #ddd;border-radius:12px;padding:18px;margin-bottom:14px}
+.summary{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.small{font-size:11px;font-weight:800;letter-spacing:.8px;color:#777}
+.big{font-size:33px;font-weight:800;margin-top:5px}
+.right{text-align:right}
+h2{font-size:19px;margin:24px 0 12px}
+.courses{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.course{overflow:hidden}
+.course:before{content:"";display:block;height:7px;background:#a51d32;margin:-18px -18px 16px}
+.course h3{font-size:18px;margin:8px 0 17px}
+.grade{font-size:30px;font-weight:800;color:#a51d32}
+.row{display:flex;justify-content:space-between;align-items:baseline}
+.letter{color:#666;font-size:13px}
+.track{height:8px;background:#ececef;border-radius:20px;overflow:hidden;margin-top:12px}
+.fill{height:100%;background:#a51d32}
+.note,.footer{font-size:12px;color:#777;margin-top:11px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd}
+th,td{text-align:left;padding:14px;border-bottom:1px solid #eee}
+th{font-size:11px;color:#666;background:#fafafa}
+tr:last-child td{border-bottom:0}
+.footer{margin-top:24px;padding-top:15px;border-top:1px solid #ddd}
+@media(max-width:600px){.courses{grid-template-columns:1fr}.big{font-size:29px}}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+ const tabs=[...document.querySelectorAll(".tab")];
+ function update(){
+   const id=(location.hash||"#dashboard").slice(1);
+   tabs.forEach(t=>t.classList.toggle("active",t.getAttribute("href")==="#"+id));
+   if(!location.hash) location.replace("#dashboard");
+ }
+ window.addEventListener("hashchange",update);
+ update();
+});
+</script>
+</head>
+<body>
+<header><div class="wrap"><div class="eyebrow">STUDENT DASHBOARD</div><h1>Personal Grade Tracker</h1></div></header>
+<main>
+<nav class="tabs">
+<a class="tab active" href="#dashboard">Dashboard</a>
+<a class="tab" href="#courses">Courses</a>
+<a class="tab" href="#grades">Grades</a>
+</nav>
+
+<section id="dashboard" class="screen">
+<div class="card summary"><div><div class="small">OVERALL AVERAGE</div><div class="big">82%</div></div><div class="right"><div class="small">CURRENT STANDING</div><div class="big">B−</div></div></div>
+<h2>My Courses</h2>
+<div class="courses">
+<div class="card course"><div class="small">COURSE</div><h3>Business Communications</h3><div class="row"><div class="grade">83%</div><div class="letter">B</div></div><div class="track"><div class="fill" style="width:83%"></div></div><div class="note">Current personal tracking grade</div></div>
+<div class="card course"><div class="small">COURSE</div><h3>Information Technology</h3><div class="row"><div class="grade">81%</div><div class="letter">B−</div></div><div class="track"><div class="fill" style="width:81%"></div></div><div class="note">Current personal tracking grade</div></div>
+</div>
+</section>
+
+<section id="courses" class="screen">
+<h2>Courses</h2>
+<div class="courses">
+<div class="card course"><div class="small">COURSE 01</div><h3>Business Communications</h3><div class="row"><div class="grade">83%</div><div class="letter">B</div></div><div class="track"><div class="fill" style="width:83%"></div></div><div class="note">Current personal tracking grade</div></div>
+<div class="card course"><div class="small">COURSE 02</div><h3>Information Technology</h3><div class="row"><div class="grade">81%</div><div class="letter">B−</div></div><div class="track"><div class="fill" style="width:81%"></div></div><div class="note">Current personal tracking grade</div></div>
+</div>
+</section>
+
+<section id="grades" class="screen">
+<h2>Grades</h2>
+<p class="note" style="margin:0 0 14px">Assignment Overview</p>
+
+<div class="card">
+<div class="row"><div><div class="small">BUSINESS COMMUNICATIONS</div><h3 style="margin:6px 0">Assignment Breakdown</h3></div><div class="grade">83%</div></div>
+<table style="margin-top:14px">
+<thead><tr><th>ASSIGNMENT</th><th>SCORE</th></tr></thead>
+<tbody>
+<tr><td>Professional Email Exercise</td><td><strong>18 / 20</strong></td></tr>
+<tr><td>Communication Styles Quiz</td><td><strong>16 / 20</strong></td></tr>
+<tr><td>Business Memo</td><td><strong>25 / 30</strong></td></tr>
+<tr><td>Presentation Outline</td><td><strong>24 / 30</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<div class="row"><div><div class="small">INFORMATION TECHNOLOGY</div><h3 style="margin:6px 0">Assignment Breakdown</h3></div><div class="grade">81%</div></div>
+<table style="margin-top:14px">
+<thead><tr><th>ASSIGNMENT</th><th>SCORE</th></tr></thead>
+<tbody>
+<tr><td>Computer Systems Quiz</td><td><strong>17 / 20</strong></td></tr>
+<tr><td>Spreadsheet Lab</td><td><strong>23 / 30</strong></td></tr>
+<tr><td>Cybersecurity Basics</td><td><strong>25 / 30</strong></td></tr>
+<tr><td>Technology Concepts Review</td><td><strong>16 / 20</strong></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<div class="footer"><strong>Personal Grade Tracker</strong></div>
+</main>
+</body></html>
